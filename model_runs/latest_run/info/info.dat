@@ -1,0 +1,11 @@
+
+layers: [1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5]
+activation: ['tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh', 'tanh']
+iterations: 300000
+optimizer: adam
+learning rate: 0.0001
+initial values: [1.390e-06 3.710e-06 1.080e-05 3.690e-05 1.775e-04]
+training time: 20897.594997406006
+residual: 0.08325054850044651
+best model at: 288000
+train loss: 0.7536918421747374
