@@ -4,7 +4,7 @@ from string import ascii_letters
 
 class Species:
 
-    size: int
+    size: float
     value: sp.Symbol
 
     def __init__(
@@ -64,7 +64,7 @@ class Species:
 
 class Reaction:
 
-    reactants: dict[Species: int]
+    reactants: dict[Species: sp.Symbol]
     product: Species
     forward_rate: sp.Symbol
     reverse_rate: sp.Symbol
@@ -166,6 +166,7 @@ class SpeciesHypergraph:
         graph.add_nodes(self.species)
 
         for spec in self.species:
+            parts = list(self._partition(spec.size*10))
             parts = list(self._partition(spec.size))[:-1]
             parts = [i for i in parts if all([j in self.sizes for j in i])]
             parts = [[self.species_dict[j] for j in i] for i in parts]
@@ -274,6 +275,36 @@ class SpeciesHypergraph:
                 rxns.append(self.graph.get_hyperedge_attribute(hypid, 'rxn'))
         return rxns
 
+
+
+class OnLadderSpeciesHypergraph:
+    sizes: list
+    species: list
+    graph: DirectedHypergraph
+    current_sample_rate: str
+
+
+    def __init__(self, sizes):
+        self.sizes = sizes
+        self.coefficients = self.get_coefficients()
+        self.rates = [[0, 0] for _ in range(len(self.sizes)-1)]
+    
+    def get_coefficients(self):
+        coefficients = []
+        for i, v in enumerate(self.sizes[:-1]):
+            coefficients.append(self.sizes[i+1]/v)
+        
+        return coefficients
+    
+    def get_diffeq(self, size):
+        rates = self.rates[self.sizes.index(size)]
+        
+        
+    
+
+
+
+
 if __name__ == "__main__":
     # B1 = Species(1)
     # B12 = Species(12)
@@ -288,10 +319,10 @@ if __name__ == "__main__":
 
     # print(rxn1.get_diffeq_terms())
 
-    graph = SpeciesHypergraph([1, 12, 24])
+    graph = SpeciesHypergraph([1, 1.4, 2, 3, 5])
     graph.create_graph()
     print(graph)
-    graph.create_graph(include_offladder_rxns=False)
+    graph.create_graph(include_offladder_rxns=True)
     print(graph)
 
     graph.get_diffeq(1)
