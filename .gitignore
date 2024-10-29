@@ -24,3 +24,5 @@ Hypergraph
 latest_run
 lorenz
 model_runs
+.gitattributes
+.gitmodules
