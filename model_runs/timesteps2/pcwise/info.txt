@@ -1,4 +1,0 @@
-training time: 4715.387819290161
-residual: 0.000239992288153245
-best model at: 68000
-train loss: 0.4422736373369494
